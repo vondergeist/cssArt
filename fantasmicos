@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Editor JavaScript online - www.cubicfactory.com</title>
+</head>
+<body>
+  <style>
+    .container{
+      width:350px;
+      height:350px;
+      border-radius:20%;
+      display:flex;
+      align-itmes:center;
+      justify-content:center;
+      background-color:#000;
+      position:relative;      
+    }
+    
+    .grass{
+      width:350px;
+      height:140px;
+      display:flex;      
+      background-color:#01DF01;     	
+      position:absolute;
+      top:60%;      
+    }
+    
+    .moon{
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      background-color:#FFF;
+      position:absolute;
+      right:75%;
+      top:15%;       
+      background-image:radial-gradient(#FFF 35%, #000);
+    }
+    
+    .moon.star{
+      width:5px;
+      height:5px;
+      background-image:radial-gradient(#FFF, #000);
+    }
+    
+    .moon.star.one{
+      right:80%;
+      top: 30%;
+    }    
+    .moon.star.two{
+      right:50%;
+      top: 50%;
+    }    
+    .moon.star.three{
+      right:20%;
+      top: 10%;
+    }
+    .moon.star.four{
+      right:30%;
+      top: 20%;
+    }
+    .moon.star.five{
+      right:60%;
+      top: 20%;
+    }
+	.moon.star.six{
+      right:90%;
+      top: 10%;
+    }    
+    
+    /*Ghosts*****************/
+    
+    .ghostOne{
+      width:30px;
+      height:60px;
+      position:absolute;
+      right:40%;
+      top:20%;
+      background-color:#FFF;
+      border-radius:40% 40% 0% 0%;
+      background-image:linear-gradient(#FFF 20%, #000);
+      animation-name: ghostOneMove;  
+  	  animation-duration: 4s;
+       animation-iteration-count: 6;
+    }
+    
+    .ghostTwo{
+      width:30px;
+      height:60px;
+      position:absolute;
+      right:10%;
+      top:30%;
+      background-color:#FFF;
+      border-radius:40% 40% 60% 0%;
+      background-image:linear-gradient(#FFF 40%, #000);
+      animation-name: ghostTwoMove;
+  	  animation-duration: 4s;
+      animation-iteration-count: 6;
+    }
+    
+    .ghostThree{
+      width:30px;
+      height:50px;
+      position:absolute;
+      right:80%;
+      top:40%;
+      background-color:#FFF;
+      border-radius:40% 40% 0% 60%;
+      background-image:linear-gradient(#FFF 20%, #000);
+      animation-name: ghostThreeMove;
+  	  animation-duration: 6s; 
+      animation-iteration-count: 6;
+    }
+    
+    .ghostOneEye{
+      width:5px;
+      height:5px;
+      background-image:radial-gradient(#555, #FFF);
+      position:absolute;
+      border-radius:50%;
+    }
+    .ghostOneEye.left{
+      right:42%;
+      top:21%;
+      animation-name: ghostOneEyeLeftMove;
+  	  animation-duration: 4s; 
+      animation-iteration-count: 6;
+    }
+    .ghostOneEye.right{
+      right:45%;
+      top:21%;
+      animation-name: ghostOneEyeRightMove;
+  	  animation-duration: 4s; 
+      animation-iteration-count: 6;
+    }
+    .ghostOneMouth{
+      width:10px;
+      height:10px;
+      background-image:linear-gradient(#555, #BEBBBB);
+      position:absolute;
+      border-radius:40% 40% 0% 0%;
+      right:43%;
+      top:24%;
+      animation-name: ghostOneMouthMove;
+  	  animation-duration: 4s; 
+      animation-iteration-count: 6;
+    }
+    
+    .ghostTwoEye{
+      width:6px;
+      height:5px;      
+      position:absolute;      
+      background-image:radial-gradient(#000 40%, #FFF);    
+      top:32%;
+    }
+    .ghostTwoEye.left{
+      right:12%;      
+      border-radius:0% 60% 0% 0%;
+      animation-name: ghostTwoEyeLeftMove;
+  	  animation-duration: 4s; 
+      animation-iteration-count: 6;
+    }
+    .ghostTwoEye.right{
+      right:15%;         
+      border-radius:60% 0% 0% 0%;
+      animation-name: ghostTwoEyeRightMove;
+  	  animation-duration: 4s; 
+      animation-iteration-count: 6;
+    }
+    
+    .ghostThreeEye{       
+      width: 0;
+      height: 0;  
+      top:42%;
+      border-radius: 50%;
+      position: absolute;       
+    }
+    .ghostThreeEye.left{
+      right:84.5%;      
+      border-left: 9px solid black;
+      border-bottom: 4px solid transparent;
+      border-top: 4px solid transparent;
+      animation-name: ghostThreeEyeLeftMove;
+  	  animation-duration: 6s; 
+      animation-iteration-count: 6;
+    }
+    .ghostThreeEye.right{
+      right:81.5%;      
+      border-right: 9px solid black;
+      border-bottom: 4px solid transparent;
+      border-top: 4px solid transparent;
+      animation-name: ghostThreeEyeRightMove;
+  	  animation-duration: 6s; 
+      animation-iteration-count: 6;
+    }
+      
+    @keyframes ghostTwoMove{
+      0% {right:10%; top:30%;}
+      50% {right:10%; top:10%;}	 
+    }
+    
+    @keyframes ghostTwoEyeLeftMove{
+      0% {right:12%; top:32%;}
+      50% {right:12%; top:12%;}	 
+    }
+    @keyframes ghostTwoEyeRightMove{
+      0% {right:15%; top:32%;}
+      50% {right:15%; top:12%;}	 
+    } 
+    
+     @keyframes ghostOneMove{
+      0% {right:40%; top:20%;}
+      50% {right:50%; top:40%;}	 
+    }    
+    @keyframes ghostOneEyeLeftMove{
+      0% {right:42%; top:21%;}
+      50% {right:52%; top:41%;}	 
+    }
+    @keyframes ghostOneEyeRightMove{
+      0% {right:45%; top:21%;}
+      50% {right:55%; top:41%;}	
+    } 
+    @keyframes ghostOneMouthMove{
+      0% {right:43%; top:24%;}
+      50% {right:53%; top:44%;}	 
+    } 
+    
+    @keyframes ghostThreeMove{
+       0% {right:80%; top:40%;}
+      25% {right:70%; top:30%;}	
+      50% {right:80%; top:20%;}	
+      75% {right:70%; top:10%;}	 
+    }    
+    @keyframes ghostThreeEyeLeftMove{
+       0% {right:84.5%; top:42%;}
+      25% {right:74.5%; top:32%;}	
+      50% {right:84.5%; top:22%;}	
+      75% {right:74.5%; top:12%;}	 
+    }
+    @keyframes ghostThreeEyeRightMove{
+       0% {right:81.5%; top:42%;}
+      25% {right:71.5%; top:32%;}	
+      50% {right:81.5%; top:22%;}	
+      75% {right:71.5%; top:12%;}
+    } 
+   
+    /****Graves*******/
+    
+    .stoneOne{
+      width:40px;
+      height:60px;
+      position:absolute;
+      right:80%;
+      top:70%;
+      background-color:gray;
+      border-radius:20% 20% 0% 0%;
+      z-index:2;
+    }
+    .stoneOne.shadow{
+      background-color:#B2B4B1;
+      right:79%;
+      top:69%;
+      z-index:1;
+      height:63px; 
+    }
+    
+    .stoneTwo{
+      width:20px;
+      height:30px;
+      position:absolute;
+      right:30%;
+      top:53%;
+      background-color:gray;
+      border-radius:20% 20% 0% 0%;
+      z-index:2;
+    }
+    .stoneTwo.shadow{
+      background-color:#B2B4B1;
+      right:29.5%;
+      top:52.5%;
+      z-index:1;
+      height:32px; 
+    }
+    
+    .stoneCross{
+      width:10px;
+      height:40px;
+      position:absolute;
+      right:50%;
+      top:65%;
+      background-color:gray;
+    }
+    .stoneCross:before{
+      width:30px;
+      height:10px;
+      background-color:gray;
+      position:absolute;
+      right:-100%;
+      top:90%;
+      content: "";
+    }
+    
+    .stoneCross:after{
+      background-color:gray;
+      content: "";
+      height:10px;
+      width:30px;
+      position:absolute;
+      right:-95%;      
+      top:25%;
+    }
+    .stoneCrossFoot{
+      width:36px;
+      height:5px;
+      background-color:A2A3A1;
+      top:78%;
+      right:46.4%;
+      position:absolute;
+      border-radius:20%;
+    }
+      
+    .stoneBroken{
+      width:35px;
+      height:40px;
+      position:absolute;
+      right:20%;
+      top:80%;
+      background-color:gray;
+      z-index:2;
+      border-radius:20% 70% 0% 0%;
+    }
+    .stoneBroken.shadow{
+      background-color:#B2B4B1;     
+      right:19.5%;
+      top:79%;
+      z-index:1; 
+      height:42px; 
+    }
+    
+    .stoneMid{
+      background-color:gray;
+      width:25px;
+      height:8px;
+      right:13%;
+      top:68%;
+      position:absolute;
+      border-radius:20% 20% 0% 0%;
+    }
+    
+    .stoneLeters{
+      width:5px;
+      height:5px;
+      background-image:radial-gradient(#448404, #01DF01);
+      position:absolute;
+      z-index:2;
+    } 
+  
+  </style>
+  
+  <div class="container">
+    <div class="grass">    
+      <div style="z-index:3; color:#CD1A0C; font-size:60%"><p>a_vondergeist</p></div>
+    </div>
+    <div class="moon">
+    </div>
+    <div class="moon star one">
+    </div>
+    <div class="moon star two">
+    </div>
+    <div class="moon star three">
+    </div>
+    <div class="moon star four">
+    </div>
+    <div class="moon star five">
+    </div>
+    <div class="moon star six">
+    </div>
+    <div class="ghostOne">
+    </div>
+    <div class="ghostOneEye left">
+    </div>
+    <div class="ghostOneEye right">
+    </div>
+    <div class="ghostOneMouth">
+    </div>
+    <div class="ghostTwo">
+    </div>
+    <div class="ghostTwoEye left">
+    </div>
+    <div class="ghostTwoEye right">
+    </div>
+    <div class="ghostThree">
+    </div>    
+    <div class="ghostThreeEye left">
+    </div>  
+    <div class="ghostThreeEye right">
+    </div>  
+    <div class="stoneOne">
+    </div>  
+    <div class="stoneOne shadow">
+    </div>  
+    <div class="stoneTwo">
+    </div>
+    <div class="stoneTwo shadow">
+    </div>  
+    <div class="stoneCross">
+    </div> 
+    <div class="stoneCrossFoot">
+    </div> 
+    <div class="stoneBroken">
+    </div> 
+    <div class="stoneBroken shadow">
+    </div> 
+    <div class="stoneLeters" style="right:40%; top:70%;">
+    </div> 
+    <div class="stoneLeters" style="right:40.5%; top:71%; width:3px">
+    </div> 
+    <div class="stoneLeters" style="right:42%; top:71%;">
+    </div> 
+    <div class="stoneLeters" style="right:39%; top:71%;">
+    </div> 
+    <div class="stoneLeters" style="right:31%; top:80%;">
+    </div> 
+    <div class="stoneLeters" style="right:30%; top:80%;">
+    </div> 
+    <div class="stoneLeters" style="right:32%; top:80.5%;">
+    </div>
+    <div class="stoneLeters" style="right:30%; top:80.5%;">
+    </div>
+    <div class="stoneLeters" style="right:70%; top:60%;">
+    </div> 
+    <div class="stoneLeters" style="right:71%; top:60%;">
+    </div> 
+    <div class="stoneLeters" style="right:78%; top:86%;">
+    </div> 
+    <div class="stoneLeters" style="right:77%; top:84.5%; height:10px">
+    </div> 
+    <div class="stoneLeters" style="right:76%; top:86%;">
+    </div> 
+    <div class="stoneLeters" style="right:75%; top:85%; height:8px">
+    </div> 
+    <div class="stoneLeters" style="right:85%; top:86%; width:6px">
+    </div> 
+    <div class="stoneLeters" style="right:88%; top:86%; width:2px">
+    </div> 
+    <div class="stoneLeters" style="right:90%; top:85%; width:2px; height:8px">
+    </div> 
+    <div class="stoneLeters" style="right:91.5%; top:86%;">
+    </div>
+    <div class="stoneLeters" style="right:92.5%; top:85%; height:8px; width:4px;">
+    </div> 
+    <div class="stoneLeters" style="right:30%; top:89%; height:10px; width:4px;">
+    </div> 
+    <div class="stoneLeters" style="right:31%; top:90.5%; width:4px;">
+    </div> 
+    <div class="stoneLeters" style="right:31.6%; top:89.6%; width:4px; height:8px;">
+    </div> 
+    <div class="stoneLeters" style="right:28%; top:89.6%; width:4px; height:8px;">
+    </div> 
+    <div class="stoneLeters" style="right:23%; top:90.5%; width:4px">
+    </div> 
+    <div class="stoneLeters" style="right:28.5%; top:60.5%; width:4px">
+    </div> 
+    <div class="stoneLeters" style="right:35%; top:61.5%; width:6px; height:3px">
+    </div> 
+    <div class="stoneLeters" style="right:10%; top:71.5%">
+    </div> 
+    <div class="stoneLeters" style="right:10.5%; top:71.5%">
+    </div> 
+    <div class="stoneLeters" style="right:11.5%; top:70.5%; height:7px;">
+    </div> 
+    <div class="stoneCrossFoot" style="right:12%; top:70%; width:30px">
+    </div> 
+    <div class="stoneMid">
+    </div>       
+  </div>
+
+</body>
+</html>
